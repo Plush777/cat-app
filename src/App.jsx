@@ -5,12 +5,14 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import Loading from './components/Loading';
 import BgError from './components/BgError';
+import WhatsYourName from './components/WhatsYourName';
 
 function App() {
 
     let [background, setBackground] = useState('');
     let [loading, setLoading] = useState(true);
     let [error, setError] = useState(false);
+    let [yourName, setYourName] = useState(false);
 
     useEffect(() => {
         axios.get('https://api.thecatapi.com/v1/images/search').then((res) => {
@@ -24,6 +26,14 @@ function App() {
         });
     },[]);
 
+    useEffect(() => {
+        if(localStorage.getItem('userName')){
+            setYourName(true);
+        }
+    },[yourName]);
+
+    console.log(yourName);
+
   return (
     <div className="App">
         <div id='bg'>
@@ -32,6 +42,8 @@ function App() {
             {loading && <Loading/>}
 
             {error && <BgError/>}
+
+            {!yourName && <WhatsYourName/>}
         </div>
     </div>
   );
