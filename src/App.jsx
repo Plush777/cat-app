@@ -6,6 +6,7 @@ import { useState } from 'react';
 import Loading from './components/Loading';
 import BgError from './components/BgError';
 import WhatsYourName from './components/WhatsYourName';
+import Main from './components/Main';
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
         if(localStorage.getItem('userName')){
             setYourName(true);
         }
-    },[yourName]);
+    },[]);
 
     console.log(yourName);
 
@@ -43,7 +44,9 @@ function App() {
 
             {error && <BgError/>}
 
-            {!yourName && <WhatsYourName/>}
+            {!yourName && <WhatsYourName setYourName={setYourName} yourName={yourName}/>}
+
+            {yourName && <Main yourName={yourName}/>}
         </div>
     </div>
   );

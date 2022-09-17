@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-function WhatsYourName() {
+function WhatsYourName(props) {
 
     let [userName,setUserName] = useState('');
     let [keyHint,setKeyHint] = useState(false);
     let [keyHintFade,setKeyHintFade] = useState('');
+
+    let a = useSelector((state) => state.userNames);
+    console.log(a);
 
     const handleValue = (e) => {
         setUserName(e.target.value);
@@ -19,8 +23,9 @@ function WhatsYourName() {
     const enterPress = (e) => {
         if(e.key === 'Enter'){
             localStorage.setItem('userName',userName);
+            console.log(userName);
+            props.setYourName(true);
         }
-        console.log(userName);
     }
 
     useEffect(() => {
