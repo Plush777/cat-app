@@ -5,7 +5,7 @@ let userNames = createSlice({
     initialState: '',
     reducers: {
         setUserName: (state, action, e) => {
-            e.target.value = action.payload
+            return e.target.value
         }
     }
 })

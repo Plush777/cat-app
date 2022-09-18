@@ -7,13 +7,16 @@ import Loading from './components/Loading';
 import BgError from './components/BgError';
 import WhatsYourName from './components/WhatsYourName';
 import Main from './components/Main';
+import useLocalStorage from 'use-local-storage';
 
 function App() {
 
+    let [userName,setUserName] = useLocalStorage('userName','');
     let [background, setBackground] = useState('');
     let [loading, setLoading] = useState(true);
     let [error, setError] = useState(false);
     let [yourName, setYourName] = useState(false);
+    let [isPressed,setIsPressed] = useState(false);
 
     useEffect(() => {
         axios.get('https://api.thecatapi.com/v1/images/search').then((res) => {
@@ -28,10 +31,21 @@ function App() {
     },[]);
 
     useEffect(() => {
-        if(localStorage.getItem('userName')){
+        if(userName === ''){
+            setYourName(false);
+        } 
+    },[userName]);
+
+    useEffect(() => {
+        if(isPressed === true){
             setYourName(true);
         }
-    },[]);
+
+        if(userName !== ''){
+            setYourName(true);
+        }
+        console.log(isPressed);
+    },[isPressed]);
 
     console.log(yourName);
 
@@ -44,9 +58,10 @@ function App() {
 
             {error && <BgError/>}
 
-            {!yourName && <WhatsYourName setYourName={setYourName} yourName={yourName}/>}
+            {!yourName && <WhatsYourName setYourName={setYourName} yourName={yourName} 
+            userName={userName} setUserName={setUserName} isPressed={isPressed} setIsPressed={setIsPressed}/>}
 
-            {yourName && <Main yourName={yourName}/>}
+            {yourName && <Main yourName={yourName} userName={userName}/>}
         </div>
     </div>
   );

@@ -37,8 +37,8 @@ function Main(props) {
                                     </div>
                 }
                 <div className="messageWrap">
-                    <span className="message">{props.userName}</span>
-                    <span className="userName"></span>
+                    <span className="userName">{props.userName}</span>
+                    <span className="defaultMsg">님, 반가워요!</span>
                 </div>
             </div>
         </>

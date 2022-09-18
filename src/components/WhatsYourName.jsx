@@ -1,20 +1,15 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 function WhatsYourName(props) {
 
-    let [userName,setUserName] = useState('');
     let [keyHint,setKeyHint] = useState(false);
     let [keyHintFade,setKeyHintFade] = useState('');
 
-    let a = useSelector((state) => state.userNames);
-    console.log(a);
-
     const handleValue = (e) => {
-        setUserName(e.target.value);
-        console.log(userName);
+        props.setUserName(e.target.value);
+        console.log(props.userName);
         
-        if(userName){
+        if(props.userName){
             setKeyHint(true);
             console.log('keyHint가 트루가 되따');
         }
@@ -22,9 +17,8 @@ function WhatsYourName(props) {
 
     const enterPress = (e) => {
         if(e.key === 'Enter'){
-            localStorage.setItem('userName',userName);
-            console.log(userName);
             props.setYourName(true);
+            props.setIsPressed(true);
         }
     }
 
