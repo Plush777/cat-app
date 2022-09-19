@@ -21,10 +21,12 @@ function Weather() {
             setWeatherIcon(data.weather[0].icon);
             setWeatherLocation(data.name);
             console.log(res);
+            
         }).catch((err) => {
             console.log(err);
         });
     },[]);
+
 
     const img = `http://openweathermap.org/img/wn/${weatherIcon}.png`;
 

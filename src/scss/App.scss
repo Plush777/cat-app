@@ -46,6 +46,9 @@ padding: 0 40px; z-index: 10;
     }
 }
 
+.questionWrap{opacity: 0; @include transition();
+    &.active{opacity: 1;}
+}
 .question{padding-bottom: 30px; font-size: 54px; color: #fff; text-align: center;}
 
 input[type="text"]{width: 100%; height: 62px; font-size: 54px; color: #fff; border: transparent; border-bottom: 3px solid #fff;

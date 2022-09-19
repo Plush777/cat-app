@@ -4,6 +4,7 @@ function WhatsYourName(props) {
 
     let [keyHint,setKeyHint] = useState(false);
     let [keyHintFade,setKeyHintFade] = useState('');
+    let [questionFade, setQuestionFade] = useState('');
 
     const handleValue = (e) => {
         props.setUserName(e.target.value);
@@ -33,10 +34,19 @@ function WhatsYourName(props) {
         }
     },[keyHint]);
 
+    useEffect(() => {
+        let timeout = setTimeout(() => {
+            setQuestionFade('active');
+            return (() => {
+                clearTimeout(timeout);
+            })
+        }, 1000);
+    },[questionFade]);
+
     return ( 
         <>
             <div className="center">
-                <div className="column">
+                <div className={'column questionWrap ' + questionFade}>
                     <div className="question">
                         <p>Hello, what's your name?</p>
                     </div>
