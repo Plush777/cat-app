@@ -1,25 +1,39 @@
+@mixin transition {
+    transition-delay: .5s; transition-duration: .3s; transition-timing-function: ease-in-out;
+}
+
+@mixin font($size,$color){
+    font-size: $size; font-family: 'Noto Sans'; color: $color;
+}
+
+@mixin flex($direction,$justify-content,$align-items){
+    display: flex; flex-direction: $direction; justify-content: $justify-content; align-items: $align-items;
+}
+
+@mixin absoluteCenter(){
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+}
+
 #bg{position: relative; width: 100%; height: 100vh;
-    img{position: absolute; display: flex; width: inherit; height: inherit; object-fit: cover;
+    >img{position: absolute; display: flex; width: inherit; height: inherit; object-fit: cover;
     z-index: -1;}
-    &:after{content: ''; position: absolute; top: 50%; left: 50%; width: 100%; height: 100vh; 
-    transform: translate(-50%,-50%); background-color: rgba($color: #000, $alpha: 0.2);
-    backdrop-filter: blur(3px); z-index: -1;}
+    &:after{content: ''; @include absoluteCenter(); width: 100%; height: 100vh; 
+    background-color: rgba($color: #000, $alpha: 0.2); backdrop-filter: blur(3px); z-index: -1;}
 }
 
 .loadingBg{position: absolute; width: 100%; height: 100%; background-color: #f4f4f4; 
-    #loading{display: flex; flex-direction: column; align-items: center; position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
+    #loading{@include flex(column,flex-start,center); @include absoluteCenter();
         p{margin-top: 20px; font-size: 14px;}
     }
 }
 
-.center{position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;
-padding: 0 40px; z-index: 10; transition: .3s ease-in-out;
-    .reason{margin-bottom: 20px; font-family: 'Noto Sans'; font-size: 16px;}
+.center{position: relative; @include flex(column,center,center); height: 100%;
+padding: 0 40px; z-index: 10;
+    .reason{margin-bottom: 20px; @include font(16px,#000);}
 }
 
-.column{position: relative; display: flex; align-items: center; justify-content: center; flex-direction: column; width: 100%;
-    .keyHint{position: absolute; bottom: -35px; opacity: 0; font-size: 16px; font-family: 'Noto Sans'; color: #fff; 
+.column{position: relative; @include flex(column,center,center); width: 100%;
+    .keyHint{position: absolute; bottom: -35px; opacity: 0; @include font(16px,#fff); 
     transition: .3s ease-in-out;
         &.active{opacity: 1;}
     }
@@ -39,12 +53,24 @@ background-color: transparent; padding: 0; padding-bottom: 10px;
     &.center{text-align: center;}
 }
 
-.timerWrap{opacity: 0; transition-delay: .5s; transition-duration: .3s; transition-timing-function: ease-in-out;
+.timerWrap{opacity: 0; @include transition();
     .timer{font-size: 168px; color: #fff;}
     &.active{opacity: 1;}
 }
 
-.messageWrap{font-size: 54px; font-family: 'Noto Sans'; color: #fff;
+.messageWrap{opacity: 0; @include transition(); @include font(54px,#fff);
+    &.active{opacity: 1;}
     .defaultMsg{margin: 0 3px;}
 }
 
+.weatherWrap{position: absolute; top: 5px; right: 15px;
+    .weatherContainer{display: flex; align-items: center;
+        .weatherImg img{height: 30px; object-fit: none;}
+    }
+    .weatherDesc{@include flex(column,center,center); margin: -4px 0 0 7px;
+        .temp{@include font(20px,#fff);}
+    }
+    .location{position: absolute; top: 27px; right: 0;
+        .locationName{@include font(14px,#fff);}
+    }
+}

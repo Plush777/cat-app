@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+import Weather from "./Weather";
 
 function Main(props) {
 
     const [time,setTime] = useState();
     const [timerFade,setTimerFade] = useState('');
+    const [messageFade ,setMessageFade] = useState('');
+    
 
     const getTime = () => {
         const date = new Date();
@@ -21,12 +24,13 @@ function Main(props) {
         if(props.yourName === true){
             let timeout = setTimeout(() => {
                 setTimerFade('active');
+                setMessageFade('active');
                 return (() => {
                     clearTimeout(timeout);
                 })
             }, 500);
         }
-    },[timerFade]);
+    },[timerFade,messageFade,props.yourName]);
 
     return ( 
         <>
@@ -36,10 +40,12 @@ function Main(props) {
                                         <span className="timer">{time}</span>
                                     </div>
                 }
-                <div className="messageWrap">
+                <div className={'messageWrap ' + messageFade}>
                     <span className="userName">{props.userName}</span>
                     <span className="defaultMsg">님, 반가워요!</span>
                 </div>
+                
+                <Weather/>
             </div>
         </>
      );
