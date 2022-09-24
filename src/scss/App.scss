@@ -77,3 +77,9 @@ background-color: transparent; padding: 0; padding-bottom: 10px;
         .locationName{@include font(14px,#fff);}
     }
 }
+
+.quotesArea{opacity: 0; position: absolute; bottom: 20px; text-align: center; @include transition();
+    .quote{margin-bottom: 5px; @include font(18px,#fafafa);}
+    .author{@include font(16px,#fff);}
+    &.active{opacity: 1;}
+}

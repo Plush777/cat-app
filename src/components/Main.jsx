@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Quotes from "./Quotes";
 import Weather from "./Weather";
 
 function Main(props) {
@@ -46,6 +47,8 @@ function Main(props) {
                 </div>
                 
                 <Weather/>
+
+                <Quotes/>
             </div>
         </>
      );
