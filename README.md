@@ -1,5 +1,8 @@
 # cat-app
 
+![image](https://user-images.githubusercontent.com/87457620/191976053-84312adf-2a9b-4819-a741-8d21857b33b1.png)
+
+
 ## ✍️ 작업리스트
 
 
