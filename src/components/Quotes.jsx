@@ -8,15 +8,15 @@ function Quotes() {
     let [quoteStorage, setQuoteStorage] = useState('');
     let [quoteFade,setQuoteFade] = useState('');
 
-    let randomQuote = () => {
-        let random = Math.floor(Math.random() * quoteData.length);
-        let randomQuote = quoteData[random];
-        setQuoteStorage(randomQuote);
-    }
-
     useEffect(() => {
+        let randomQuote = () => {
+            let random = Math.floor(Math.random() * quoteData.length);
+            let randomQuote = quoteData[random];
+            setQuoteStorage(randomQuote);
+        }
+
         randomQuote();
-    },[quoteStorage]);
+    },[quoteData]);
 
     useEffect(() => {
         let timeout = setTimeout(() => {

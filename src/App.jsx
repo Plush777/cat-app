@@ -16,7 +16,7 @@ function App() {
     let [loading, setLoading] = useState(true);
     let [error, setError] = useState(false);
     let [yourName, setYourName] = useState(false);
-    let [isPressed,setIsPressed] = useState(false);
+    let [isPressed,setIsPressed] = useLocalStorage('enter',false);
 
     useEffect(() => {
         axios.get('https://api.thecatapi.com/v1/images/search').then((res) => {
@@ -32,22 +32,20 @@ function App() {
 
     useEffect(() => {
         if(userName === ''){
-            setYourName(false);
-        } 
-    },[userName]);
+            setIsPressed(false);
+        }
+    },[userName,setIsPressed])
 
     useEffect(() => {
-        if(isPressed === true){
+        if(!isPressed){
+            setYourName(false);
+        } else {
             setYourName(true);
         }
-
-        if(userName !== ''){
-            setYourName(true);
-        }
-        console.log(isPressed);
     },[isPressed]);
 
     console.log(yourName);
+    console.log(`isPressed: ${isPressed}`);
 
   return (
     <div className="App">
