@@ -1,5 +1,5 @@
 @mixin transition {
-    transition-delay: .5s; transition-duration: .3s; transition-timing-function: ease-in-out;
+    opacity: 0; transition-delay: .5s; transition-duration: .3s; transition-timing-function: ease-in-out;
 }
 
 @mixin font($size,$color){
@@ -13,6 +13,8 @@
 @mixin absoluteCenter(){
     position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
 }
+
+:where(.timerWrap,.messageWrap,.quotesArea,.questionWrap){@include transition()}
 
 #bg{position: relative; width: 100%; height: 100vh;
     >img{position: absolute; display: flex; width: inherit; height: inherit; object-fit: cover;
@@ -46,9 +48,10 @@ padding: 0 40px; z-index: 10;
     }
 }
 
-.questionWrap{opacity: 0; @include transition();
+.questionWrap{
     &.active{opacity: 1;}
 }
+
 .question{padding-bottom: 30px; font-size: 54px; color: #fff; text-align: center;}
 
 input[type="text"]{width: 100%; height: 62px; font-size: 54px; color: #fff; border: transparent; border-bottom: 3px solid #fff;
@@ -56,12 +59,12 @@ background-color: transparent; padding: 0; padding-bottom: 10px;
     &.center{text-align: center;}
 }
 
-.timerWrap{opacity: 0; @include transition();
+.timerWrap{display: flex; line-height: 170px;
     .timer{font-size: 168px; color: #fff;}
     &.active{opacity: 1;}
 }
 
-.messageWrap{opacity: 0; @include transition(); @include font(54px,#fff);
+.messageWrap{@include font(54px,#fff);
     &.active{opacity: 1;}
     .defaultMsg{margin: 0 3px;}
 }
@@ -78,8 +81,24 @@ background-color: transparent; padding: 0; padding-bottom: 10px;
     }
 }
 
-.quotesArea{opacity: 0; position: absolute; bottom: 20px; text-align: center; @include transition();
+.quotesArea{position: absolute; bottom: 20px; text-align: center;
     .quote{margin-bottom: 5px; @include font(18px,#fafafa);}
     .author{@include font(16px,#fff);}
     &.active{opacity: 1;}
+    &:hover .toolTip.quotes{opacity: 1;}
 }
+
+.toolTip{opacity: 0; transition: .3s ease-in-out; transition-property: opacity; position: absolute; display: flex; 
+align-items: center; height: 30px; padding: 0 7px; @include font(16px,#fff); border-radius: 4px; 
+background-color: rgba($color: #000, $alpha: 0.5);
+    button{font-size: inherit; font-family: inherit; color: inherit;}
+    &.quotes{top: -40px; left: 50%; transform: translateX(-50%);}
+}
+
+.todayWrap{flex: 0.7; display: flex; flex-direction: column; justify-content: flex-end; 
+@include font(35px,#fafafa); text-align: center;
+    .txt{margin-bottom: 10px;}
+   input[type="text"]{height: 42px; font-size: 24px; padding-bottom: 0;}
+}
+
+.centerContainer{position: absolute; @include flex(column,center,center);}

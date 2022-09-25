@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Quotes from "./Quotes";
+import TodayList from "./TodayList";
 import Weather from "./Weather";
 
 function Main(props) {
@@ -36,17 +37,22 @@ function Main(props) {
     return ( 
         <>
             <div className="center">
-                {
-                    props.yourName && <div className={'timerWrap ' + timerFade}>
-                                        <span className="timer">{time}</span>
-                                    </div>
-                }
-                <div className={'messageWrap ' + messageFade}>
-                    <span className="userName">{props.userName}</span>
-                    <span className="defaultMsg">님, 반가워요!</span>
+               
+                <div className="centerContainer">
+                    {
+                        props.yourName && <div className={'timerWrap ' + timerFade}>
+                                            <span className="timer">{time}</span>
+                                        </div>
+                    }
+                    <div className={'messageWrap ' + messageFade}>
+                        <span className="userName">{props.userName}</span>
+                        <span className="defaultMsg">님, 반가워요!</span>
+                    </div>
                 </div>
                 
                 <Weather/>
+
+                <TodayList/>
 
                 <Quotes/>
             </div>
