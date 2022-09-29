@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Quotes from "./Quotes";
+import TodayActive from "./TodayActive";
 import TodayList from "./TodayList";
 import Weather from "./Weather";
 
@@ -34,6 +35,23 @@ function Main(props) {
         }
     },[timerFade,messageFade,props.yourName]);
 
+    useEffect(() => {
+        if(props.todayStorage === ''){
+            props.setTodayIsPressed(false);
+        } 
+    },[props.todayStorage,props]);
+
+    useEffect(() => {
+        if(!props.setTodayIsPressed){
+            props.setTodayList(false);
+        } else {
+            props.setTodayList(true);
+        }
+    },[props,props.setTodayIsPressed]);
+
+    console.log(props.todayList);
+    console.log(props.todayIsPressed);
+
     return ( 
         <>
             <div className="center">
@@ -52,7 +70,10 @@ function Main(props) {
                 
                 <Weather/>
 
-                <TodayList/>
+                {props.todayList && <TodayActive/>}
+
+                {!props.todayList && <TodayList todayStorage={props.todayStorage} setTodayStorage={props.setTodayStorage} 
+                todayList={props.todayList} setTodayList={props.setTodayList} setTodayIsPressed={props.setTodayIsPressed}/>}
 
                 <Quotes/>
             </div>
