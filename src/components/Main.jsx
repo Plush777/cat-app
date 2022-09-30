@@ -39,15 +39,17 @@ function Main(props) {
         if(props.todayStorage === ''){
             props.setTodayIsPressed(false);
         } 
-    },[props.todayStorage,props]);
+    },[props.todayStorage,props,props.setTodayIsPressed]);
+
+    console.log(props.todayIsPressed);
 
     useEffect(() => {
-        if(!props.setTodayIsPressed){
+        if(!props.todayIsPressed){
             props.setTodayList(false);
         } else {
             props.setTodayList(true);
         }
-    },[props,props.setTodayIsPressed]);
+    },[props,props.todayIsPressed,props.setTodayList]);
 
     console.log(props.todayList);
     console.log(props.todayIsPressed);
@@ -70,7 +72,7 @@ function Main(props) {
                 
                 <Weather/>
 
-                {props.todayList && <TodayActive/>}
+                {props.todayList && <TodayActive todayStorage={props.todayStorage}/>}
 
                 {!props.todayList && <TodayList todayStorage={props.todayStorage} setTodayStorage={props.setTodayStorage} 
                 todayList={props.todayList} setTodayList={props.setTodayList} setTodayIsPressed={props.setTodayIsPressed}/>}

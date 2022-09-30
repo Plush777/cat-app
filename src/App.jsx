@@ -8,7 +8,6 @@ import BgError from './components/BgError';
 import WhatsYourName from './components/WhatsYourName';
 import Main from './components/Main';
 import useLocalStorage from 'use-local-storage';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function App() {
 
