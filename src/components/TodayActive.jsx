@@ -3,6 +3,8 @@ import { faSquareCheck,faEllipsis  } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import useLocalStorage from "use-local-storage";
+import TodayTooltip from "./TodayTooltip";
+import { useRef } from "react";
 
 const MyTodayList = styled.div`
     display: flex;
@@ -23,7 +25,9 @@ const Icon = styled.button.attrs({type: 'button'})`
     transform: translateY(-50%);
     display: ${props => props.display};
     &.lt{left: -15px;}
-    &.rt{right: -15px;}
+    &.rt{right: -15px;
+        &.block .ico{display:block;}
+    }
     color: ${props => props.svgColor};
 `
 
@@ -61,6 +65,9 @@ function TodayActive(props) {
 
     let [isChecked,setIsChecked] = useLocalStorage('isChecked',false);
     let [txtIsChecked,setTxtIsChecked] = useState('');
+    let [toolTip,setToolTip] = useState(false);
+    let [toolTipClass,setToolTipClass] = useState('');
+    let [isIconActive,setIsIconActive] = useState('');
 
     const handleChecked = () => {
         setIsChecked(true);
@@ -70,6 +77,12 @@ function TodayActive(props) {
         setIsChecked(false);
     }
 
+    const handleTooltip = () => {
+        setToolTip(!toolTip);
+    }
+
+    const ref = useRef();
+
     useEffect(() => {
         if(isChecked){
             setTxtIsChecked('checked');
@@ -77,6 +90,30 @@ function TodayActive(props) {
             setTxtIsChecked('');
         }
     },[isChecked])
+
+    useEffect(() => {
+        if(toolTip){
+            setToolTipClass('active');
+            setIsIconActive('block');
+        } else {
+            setToolTipClass('');
+            setIsIconActive('');
+        }
+    },[toolTip])
+
+    useEffect(() => {
+        document.addEventListener('mousedown',handleClickOutside);
+        
+        return () => {
+            document.removeEventListener('mousedown',handleClickOutside);
+        }
+    });
+
+    const handleClickOutside = e => {
+        if(ref.current && !ref.current.contains(e.target)){
+            setToolTip(false);
+        }
+    }
 
     return ( 
         <>
@@ -91,9 +128,10 @@ function TodayActive(props) {
                     <IconDefault display="none" className="lt unCheckBox" bdColor="#fff" onClick={handleChecked}/>}
 
                     <TodayValue className="todayValue">{props.todayStorage}</TodayValue>
-                    <Icon display="flex" className="rt" svgColor="#fff">  
+                    <Icon display="flex" className={`rt ${isIconActive}`} svgColor="#fff" onClick={handleTooltip} ref={ref}>  
                         <FontAwesomeIcon icon={faEllipsis} className="ico svg hv"/>
                     </Icon>
+                    <TodayTooltip toolTipClass={toolTipClass}/>
                 </IconContainer>
             </MyTodayList>  
         </>

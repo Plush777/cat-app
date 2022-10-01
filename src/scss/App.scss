@@ -93,17 +93,26 @@ align-items: center; height: 30px; padding: 0 7px; @include font(16px,#fff); bor
 background-color: rgba($color: #000, $alpha: 0.5);
     button{font-size: inherit; font-family: inherit; color: inherit;}
     &.quotes{top: -40px; left: 50%; transform: translateX(-50%);}
+    &.today{width: 150px; height: auto; font-size: inherit; padding: 0; background-color: rgba($color: #000, $alpha: 0.8); 
+    z-index: -1; left: 82px; top: 50px; visibility: hidden; transition-property: all;
+        &.arrowUp:before{border-bottom: 6px solid rgba($color: #000, $alpha: 0.8); top: -6px; left: 11px;}
+        &.active{opacity: 1; z-index: 1; visibility: visible;}
+    }
+    &.arrowUp:before{content: ''; position: absolute; width: 0; height: 0; border-left: 5px solid transparent;
+    border-right: 5px solid transparent; border-bottom: 5px solid rgba($color: #000, $alpha: 0.5);}
 }
 
 .todayWrap{flex: 0.7; display: flex; flex-direction: column; justify-content: flex-end; 
 @include font(35px,#fafafa); text-align: center;
     .txt{margin-bottom: 10px;}
-   input[type="text"]{height: 42px; font-size: 24px; padding-bottom: 0;}
+    input[type="text"]{height: 42px; font-size: 24px; padding-bottom: 0;}
 }
 
 .centerContainer{position: absolute; @include flex(column,center,center);}
 
 .ico{
+    &.pencil{width: 13px; height: 13px; padding-left: 15px;}
+    &.xMark{padding-left: 15px;}
     &.svg{width: 24px; height: 24px;}
     &.hv{display: none;}
 }
