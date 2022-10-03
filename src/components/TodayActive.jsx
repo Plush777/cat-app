@@ -131,7 +131,9 @@ function TodayActive(props) {
                     <Icon display="flex" className={`rt ${isIconActive}`} svgColor="#fff" onClick={handleTooltip} ref={ref}>  
                         <FontAwesomeIcon icon={faEllipsis} className="ico svg hv"/>
                     </Icon>
-                    <TodayTooltip toolTipClass={toolTipClass}/>
+                    <TodayTooltip toolTipClass={toolTipClass} todayIsPressed={props.todayIsPressed} 
+                    setTodayIsPressed={props.setTodayIsPressed} isChecked={isChecked} setIsChecked={setIsChecked}
+                    todayList={props.todayList} setTodayList={props.setTodayList}/>
                 </IconContainer>
             </MyTodayList>  
         </>
