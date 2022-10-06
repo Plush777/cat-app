@@ -15,20 +15,18 @@ const MyTodayList = styled.div`
 `
 
 const TodayValue = styled.span`
+    margin: 0 12px;
     color: #fff;
     font-size: 36px;
 `
 
 const Icon = styled.button.attrs({type: 'button'})`
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     display: ${props => props.display};
-    &.lt{left: -15px;}
-    &.rt{right: -15px;
-        &.block .ico{display:block;}
-    }
     color: ${props => props.svgColor};
+    &.rt{
+        &.block .ico{display: block;}
+    }
+    
 `
 
 const IconDefault = styled(Icon)`
@@ -63,7 +61,7 @@ const IconContainer = styled.div`
 
 function TodayActive(props) {
 
-    let [isChecked,setIsChecked] = useLocalStorage('isChecked',false);
+    let [isChecked,setIsChecked] = useState(false);
     let [txtIsChecked,setTxtIsChecked] = useState('');
     let [toolTip,setToolTip] = useState(false);
     let [toolTipClass,setToolTipClass] = useState('');
@@ -128,12 +126,13 @@ function TodayActive(props) {
                     <IconDefault display="none" className="lt unCheckBox" bdColor="#fff" onClick={handleChecked}/>}
 
                     <TodayValue className="todayValue">{props.todayStorage}</TodayValue>
-                    <Icon display="flex" className={`rt ${isIconActive}`} svgColor="#fff" onClick={handleTooltip} ref={ref}>  
+                    <Icon className={`rt ${isIconActive}`} svgColor="#fff" onClick={handleTooltip} ref={ref}>  
                         <FontAwesomeIcon icon={faEllipsis} className="ico svg hv"/>
+                        <TodayTooltip toolTipClass={toolTipClass} todayIsPressed={props.todayIsPressed} 
+                        setTodayIsPressed={props.setTodayIsPressed} isChecked={isChecked} setIsChecked={setIsChecked}
+                        todayList={props.todayList} setTodayList={props.setTodayList} txtIsChecked={txtIsChecked} 
+                        setTxtIsChecked={setTxtIsChecked}/>
                     </Icon>
-                    <TodayTooltip toolTipClass={toolTipClass} todayIsPressed={props.todayIsPressed} 
-                    setTodayIsPressed={props.setTodayIsPressed} isChecked={isChecked} setIsChecked={setIsChecked}
-                    todayList={props.todayList} setTodayList={props.setTodayList}/>
                 </IconContainer>
             </MyTodayList>  
         </>

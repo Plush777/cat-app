@@ -29,9 +29,8 @@ function TodayTooltip(props) {
     const rollback = () => {
         props.setTodayIsPressed(false);
         props.setTodayList(false);
-        props.setIsChecked(false);
     }
-    
+
     return ( 
         <>
             <div className={`toolTip today arrowUp ${props.toolTipClass}`}>
