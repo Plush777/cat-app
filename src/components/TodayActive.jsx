@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareCheck,faEllipsis  } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import useLocalStorage from "use-local-storage";
 import TodayTooltip from "./TodayTooltip";
 import { useRef } from "react";
 
@@ -15,16 +14,21 @@ const MyTodayList = styled.div`
 `
 
 const TodayValue = styled.span`
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 95%;
     margin: 0 12px;
     color: #fff;
     font-size: 36px;
 `
 
 const Icon = styled.button.attrs({type: 'button'})`
-    display: ${props => props.display};
+    visibility: ${props => props.visibility};
     color: ${props => props.svgColor};
     &.rt{
-        &.block .ico{display: block;}
+        &.block .ico{visibility: visible;}
     }
     
 `
@@ -50,12 +54,12 @@ const IconContainer = styled.div`
     margin-top: 5px;
 
     &:hover{
-        .ico.hv{display: block;}
-        .unCheckBox{display: block;}
+        .ico.hv{visibility: visible;}
+        .unCheckBox{visibility: visible;}
     }
     &.checked{
         .todayValue{text-decoration: line-through; color: #ddd;}
-        .activeCheckBox{display: block;}
+        .activeCheckBox{visibility: visible;}
     }
 `
 
@@ -119,11 +123,11 @@ function TodayActive(props) {
                 <TodayTxt>오늘 할 일</TodayTxt>
                 <IconContainer className={txtIsChecked}>
                     {isChecked ? 
-                    <Icon display="flex" className="lt" svgColor="#fff" onClick={handleUnChecked}>
+                    <Icon visibility="visible" className="lt" svgColor="#fff" onClick={handleUnChecked}>
                         <FontAwesomeIcon icon={faSquareCheck} className="ico svg hv activeCheckBox"/>
                     </Icon> 
                         : 
-                    <IconDefault display="none" className="lt unCheckBox" bdColor="#fff" onClick={handleChecked}/>}
+                    <IconDefault visibility="hidden" className="lt unCheckBox" bdColor="#fff" onClick={handleChecked}/>}
 
                     <TodayValue className="todayValue">{props.todayStorage}</TodayValue>
                     <Icon className={`rt ${isIconActive}`} svgColor="#fff" onClick={handleTooltip} ref={ref}>  
@@ -131,7 +135,8 @@ function TodayActive(props) {
                         <TodayTooltip toolTipClass={toolTipClass} todayIsPressed={props.todayIsPressed} 
                         setTodayIsPressed={props.setTodayIsPressed} isChecked={isChecked} setIsChecked={setIsChecked}
                         todayList={props.todayList} setTodayList={props.setTodayList} txtIsChecked={txtIsChecked} 
-                        setTxtIsChecked={setTxtIsChecked}/>
+                        setTxtIsChecked={setTxtIsChecked} todayStorage={props.todayStorage} 
+                        setTodayStorage={props.setTodayStorage}/>
                     </Icon>
                 </IconContainer>
             </MyTodayList>  

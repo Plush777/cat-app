@@ -26,7 +26,13 @@ const MenuTxt = styled.span`
 
 function TodayTooltip(props) {
 
-    const rollback = () => {
+    const handleClear = () => {
+        props.setTodayIsPressed(false);
+        props.setTodayList(false);
+        props.setTodayStorage('');
+    }
+
+    const handleEdit = () => {
         props.setTodayIsPressed(false);
         props.setTodayList(false);
     }
@@ -35,11 +41,11 @@ function TodayTooltip(props) {
         <>
             <div className={`toolTip today arrowUp ${props.toolTipClass}`}>
                 <MenuList>
-                    <MenuItem>
+                    <MenuItem onClick={handleEdit}>
                         <FontAwesomeIcon className="ico pencil" icon={faPencil} />
                         <MenuTxt>Edit</MenuTxt>
                     </MenuItem>
-                    <MenuItem onClick={rollback}>
+                    <MenuItem onClick={handleClear}>
                         <FontAwesomeIcon className="ico xMark" icon={faXmark} />
                         <MenuTxt>clear</MenuTxt>
                     </MenuItem>

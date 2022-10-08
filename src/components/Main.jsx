@@ -72,8 +72,9 @@ function Main(props) {
                 
                 <Weather/>
 
-                {props.todayList && <TodayActive todayStorage={props.todayStorage} todayIsPressed={props.todayIsPressed}
-                setTodayIsPressed={props.setTodayIsPressed} todayList={props.todayList} setTodayList={props.setTodayList}/>}
+                {props.todayList && <TodayActive todayStorage={props.todayStorage} setTodayStorage={props.setTodayStorage} 
+                todayIsPressed={props.todayIsPressed}setTodayIsPressed={props.setTodayIsPressed} 
+                todayList={props.todayList} setTodayList={props.setTodayList}/>}
 
                 {!props.todayList && <TodayList todayStorage={props.todayStorage} setTodayStorage={props.setTodayStorage} 
                 todayList={props.todayList} setTodayList={props.setTodayList} setTodayIsPressed={props.setTodayIsPressed}/>}

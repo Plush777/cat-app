@@ -1,7 +1,7 @@
 import './scss/App.scss';
 import './scss/reset.scss'
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect} from 'react';
 import { useState } from 'react';
 import Loading from './components/Loading';
 import BgError from './components/BgError';
@@ -18,7 +18,7 @@ function App() {
     let [yourName, setYourName] = useState(false);
     let [isPressed,setIsPressed] = useLocalStorage('enter',false);
     let [todayList,setTodayList] = useState(false); //todayList 컴포넌트 렌더링 여부
-    let [todayStorage,setTodayStorage] = useLocalStorage('todayList',''); //todayList 컴포넌트에서 인풋값 저장
+    let [todayStorage,setTodayStorage] = useState(''); //todayList 컴포넌트에서 인풋값 저장
     let [todayIsPressed,setTodayIsPressed] = useLocalStorage('todayIsPressed',false); //todayList 컴포넌트에서 인풋값 저장
 
     useEffect(() => {

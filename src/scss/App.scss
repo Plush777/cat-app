@@ -114,5 +114,5 @@ background-color: rgba($color: #000, $alpha: 0.5);
     &.pencil{width: 13px; height: 13px; padding-left: 15px;}
     &.xMark{padding-left: 15px;}
     &.svg{width: 24px; height: 24px;}
-    &.hv{display: none;}
+    &.hv{visibility: hidden;}
 }
