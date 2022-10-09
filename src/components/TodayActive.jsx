@@ -70,6 +70,7 @@ function TodayActive(props) {
     let [toolTip,setToolTip] = useState(false);
     let [toolTipClass,setToolTipClass] = useState('');
     let [isIconActive,setIsIconActive] = useState('');
+    let [todayActiveFade,setTodayActiveFade] = useState('');
 
     const handleChecked = () => {
         setIsChecked(true);
@@ -104,12 +105,21 @@ function TodayActive(props) {
     },[toolTip])
 
     useEffect(() => {
+        let timeout = setTimeout(() => {
+            setTodayActiveFade('active');
+            return (() => {
+                clearTimeout(timeout);
+            })
+        }, 500);
+    },[todayActiveFade]);
+
+    useEffect(() => {
         document.addEventListener('mousedown',handleClickOutside);
         
         return () => {
             document.removeEventListener('mousedown',handleClickOutside);
         }
-    });
+    },[ref]);
 
     const handleClickOutside = e => {
         if(ref.current && !ref.current.contains(e.target)){
@@ -119,7 +129,7 @@ function TodayActive(props) {
 
     return ( 
         <>
-            <MyTodayList>
+            <MyTodayList className={`transition ${todayActiveFade}`}>
                 <TodayTxt>오늘 할 일</TodayTxt>
                 <IconContainer className={txtIsChecked}>
                     {isChecked ? 

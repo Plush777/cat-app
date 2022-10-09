@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Quotes from "./Quotes";
+import SearchForm from "./SearchForm";
 import TodayActive from "./TodayActive";
 import TodayList from "./TodayList";
 import Weather from "./Weather";
@@ -79,6 +80,8 @@ function Main(props) {
                 {!props.todayList && <TodayList todayStorage={props.todayStorage} setTodayStorage={props.setTodayStorage} 
                 todayList={props.todayList} setTodayList={props.setTodayList} setTodayIsPressed={props.setTodayIsPressed}/>}
 
+                <SearchForm/>
+                
                 <Quotes/>
             </div>
         </>
