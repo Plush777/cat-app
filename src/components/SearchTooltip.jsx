@@ -26,6 +26,30 @@ const ListTxt = styled.span`
 `
 
 function SearchTooltip(props) {
+
+    const engine = [
+        {
+            id: 1,
+            txt: 'Google',
+            icons: 'faGoogle'
+        },
+        {
+            id: 2,
+            txt: 'Edge',
+            icons: 'faEdge'
+        },
+        {
+            id: 3,
+            txt: 'Naver',
+            icons: 'faN'
+        }
+    ]
+
+    const handleSelect = () => {
+        props.setToolTipToggle(false);
+        props.setSearchStyle(true);
+    }
+
     return ( 
         <>
             <div className={`toolTip arrowUp searchWith ${props.selectClass}`} style={{
@@ -33,15 +57,21 @@ function SearchTooltip(props) {
                 top: '50px'
             }}>
                 <List>
-                    <ListItem>
-                        <ListTxt>Google</ListTxt>
-                    </ListItem>
-                    <ListItem>
-                        <ListTxt>Edge</ListTxt>
-                    </ListItem> 
-                    <ListItem>
-                        <ListTxt>Naver</ListTxt>
-                    </ListItem>
+                    {
+                       Object.keys(engine).map((item , index) => {
+                            return (
+                                <ListItem key={engine[index].id} onClick={
+                                    (e) => {props.setSelected(engine[index].icons)
+                                    e.stopPropagation()
+                                    handleSelect()
+                                    }}>
+                                    <ListTxt>{engine[item].txt}</ListTxt>
+                                </ListItem>
+                            )
+                        })
+                    }
+
+                    {console.log(props.selected)}
                 </List>
             </div>
         </>
