@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import Quotes from "./Quotes";
-import SearchForm from "./SearchForm";
-import TodayActive from "./TodayActive";
-import TodayList from "./TodayList";
+import SearchForm from "./Search/SearchForm";
+import TodayActive from "./Today/TodayActive";
+import TodayList from "./Today/TodayList";
+import Todo from "./Todo/Todo";
 import Weather from "./Weather";
 
 function Main(props) {
@@ -83,6 +84,8 @@ function Main(props) {
                 <SearchForm/>
                 
                 <Quotes/>
+
+                <Todo/>
             </div>
         </>
      );

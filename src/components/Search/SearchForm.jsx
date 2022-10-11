@@ -141,7 +141,7 @@ function SearchForm() {
     }
 
     const searchSubmit = e => {
-        if(e.key === 'Enter'){
+        if(e.key === 'Enter' && searchValue !== ''){
             window.open(searchUrl + searchValue);
         }
     }
