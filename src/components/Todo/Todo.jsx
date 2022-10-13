@@ -28,7 +28,7 @@ function Todo() {
             <BtnTodoDiv>
                 <BtnTodo onClick={toggleTodo} isOpen={isOpen}>Todo</BtnTodo>
                 {
-                    isOpen && <TodoListBox isOpen={isOpen}/>
+                    isOpen && <TodoListBox isOpen={isOpen} />
                 }
             </BtnTodoDiv>
         </>
