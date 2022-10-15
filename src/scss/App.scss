@@ -95,7 +95,7 @@ background-color: rgba($color: #000, $alpha: 0.5);
         &.active{opacity: 1; z-index: 1; visibility: visible;}
     }
     &.searchWith{width: 100px; height: auto; padding: 0; background-color: rgba($color: #0f0f0f, $alpha: 0.85); 
-    z-index: -1; visibility: hidden;
+    z-index: -1; visibility: hidden; transition-property: all;
         &.arrowUp:before{top: -5px; left: 10px; border-bottom-color: rgba($color: #0f0f0f, $alpha: 0.85);}
         &.active{opacity: 1; z-index: 1; visibility: visible;}
     }

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import TodoListBox from "./TodoListBox";
+import { useTransition , animated } from "react-spring";
 
 const BtnTodoDiv = styled.div`
     position: absolute;
@@ -20,7 +21,29 @@ function Todo() {
     let [isOpen, setIsOpen] = useState(false);
 
     const toggleTodo = () => {
-        setIsOpen(!isOpen);
+        setIsOpen(prev => !prev);
+    }
+
+    const transitions = useTransition(isOpen,{
+        from: { opacity: 0 },
+        enter: { opacity: 1 },
+        leave: { opacity: 0 },
+    });
+
+    const ref = useRef();
+
+    useEffect(() => {
+        document.addEventListener('mousedown',handleClickOutside);
+        
+        return () => {
+            document.removeEventListener('mousedown',handleClickOutside);
+        }
+    },[ref]);
+
+    const handleClickOutside = e => {
+        if(ref.current && !ref.current.contains(e.target)){
+            setIsOpen(false);
+        }
     }
 
     return ( 
@@ -28,7 +51,7 @@ function Todo() {
             <BtnTodoDiv>
                 <BtnTodo onClick={toggleTodo} isOpen={isOpen}>Todo</BtnTodo>
                 {
-                    isOpen && <TodoListBox isOpen={isOpen} />
+                    transitions((style, item) => item && <animated.div style={style} ref={ref}><TodoListBox/></animated.div>)
                 }
             </BtnTodoDiv>
         </>
