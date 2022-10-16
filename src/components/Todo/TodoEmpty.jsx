@@ -5,13 +5,13 @@ const Empty = styled.div`
     flex-direction: column;
     align-items: center;
     row-gap: 20px;
-    padding: 40px 0;
+    padding: 45px 0 55px;
 `
 
 const EmptyDesc = styled.p`
     text-align: center;
     font-size: 15px;
-    color: #fff;
+    color: rgba(255,255,255,0.7);
     line-height: 22px;
 `
 
@@ -33,12 +33,19 @@ const BtnAdd = styled.button.attrs({'type': 'button'})`
     }
 `
 
-function TodoEmpty() {
+function TodoEmpty(props) {
+
+    const changeTodo = () => {
+        props.setChangeAdd(true);
+    }
+
     return ( 
         <>
             <Empty>
-                <EmptyDesc>할 일이 비어있네요!<br/>아래 버튼을 눌러 추가해보세요.</EmptyDesc>
-                <BtnAdd>할 일 추가하기</BtnAdd>
+                <EmptyDesc>할 일이 비어있어요.<br/>한번 추가해보세요!</EmptyDesc>
+                {
+                    !props.changeAdd &&  <BtnAdd onClick={changeTodo}>할 일 추가하기</BtnAdd>
+                }
             </Empty>
         </>
      );

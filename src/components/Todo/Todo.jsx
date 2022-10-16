@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import TodoListBox from "./TodoListBox";
-import { useTransition , animated } from "react-spring";
+import { useTransition } from "react-spring";
 
 const BtnTodoDiv = styled.div`
     position: absolute;
@@ -25,9 +25,10 @@ function Todo() {
     }
 
     const transitions = useTransition(isOpen,{
-        from: { opacity: 0 },
-        enter: { opacity: 1 },
-        leave: { opacity: 0 },
+        from: { opacity: 0 , transform: 'translateY(10%)' },
+        enter: { opacity: 1 , transform: 'translateY(0%)' },
+        leave: { opacity: 0 , transform: 'translateY(10%)' },
+        config: { duration: 200 }
     });
 
     const ref = useRef();
@@ -48,10 +49,10 @@ function Todo() {
 
     return ( 
         <>  
-            <BtnTodoDiv>
+            <BtnTodoDiv ref={ref}>
                 <BtnTodo onClick={toggleTodo} isOpen={isOpen}>Todo</BtnTodo>
                 {
-                    transitions((style, item) => item && <animated.div style={style} ref={ref}><TodoListBox/></animated.div>)
+                    transitions((style, item) => item && <TodoListBox style={style}/>)
                 }
             </BtnTodoDiv>
         </>

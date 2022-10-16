@@ -5,11 +5,33 @@ const TodoAddDiv = styled.div`
     height: 40px;
 `
 
-function TodoAdd() {
+function TodoAdd(props) {
+
+    const inputTodo = e => {
+        props.setAddTodo(e.target.value);
+        props.setAddTodoValue(e.target.value);
+    }
+
+    const enter = e => {
+        if(e.key === 'Enter'){
+            props.setAddTodoEvent(true);
+            props.setAddTodoValue('');
+
+            props.setTodoData([
+                ...props.todoData,
+                {
+                    id: props.todoData.length,
+                    name: props.addTodo
+                }
+            ]);
+        }
+    }
+
     return ( 
         <>
             <TodoAddDiv>
-                <input type="text" placeholder="할 일을 적어보세요." className="todo" />
+                <input type="text" placeholder="할 일을 적어보세요." className="todo" onChange={inputTodo} 
+                onKeyPress={enter} value={props.addTodoValue}/>
             </TodoAddDiv>
         </>
      );
