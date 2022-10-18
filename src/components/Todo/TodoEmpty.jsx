@@ -16,6 +16,7 @@ const EmptyDesc = styled.p`
 `
 
 const BtnAdd = styled.button.attrs({'type': 'button'})`
+    /* visibility: ${({changeAddButton}) => changeAddButton ? 'visible' : 'hidden'}; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,6 +37,7 @@ const BtnAdd = styled.button.attrs({'type': 'button'})`
 function TodoEmpty(props) {
 
     const changeTodo = () => {
+        props.setChangeAddButton(true);
         props.setChangeAdd(true);
     }
 
@@ -44,7 +46,7 @@ function TodoEmpty(props) {
             <Empty>
                 <EmptyDesc>할 일이 비어있어요.<br/>한번 추가해보세요!</EmptyDesc>
                 {
-                    !props.changeAdd &&  <BtnAdd onClick={changeTodo}>할 일 추가하기</BtnAdd>
+                    !props.changeAddButton &&  <BtnAdd onClick={changeTodo}>할 일 추가하기</BtnAdd>
                 }
             </Empty>
         </>

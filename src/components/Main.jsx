@@ -11,6 +11,7 @@ function Main(props) {
     const [time,setTime] = useState();
     const [timerFade,setTimerFade] = useState('');
     const [messageFade ,setMessageFade] = useState('');
+    let [currentInput,setCurrentInput] = useState('');
     
 
     const getTime = () => {
@@ -76,10 +77,11 @@ function Main(props) {
 
                 {props.todayList && <TodayActive todayStorage={props.todayStorage} setTodayStorage={props.setTodayStorage} 
                 todayIsPressed={props.todayIsPressed}setTodayIsPressed={props.setTodayIsPressed} 
-                todayList={props.todayList} setTodayList={props.setTodayList}/>}
+                todayList={props.todayList} setTodayList={props.setTodayList} currentInput={currentInput} setCurrentInput={setCurrentInput}/>}
 
                 {!props.todayList && <TodayList todayStorage={props.todayStorage} setTodayStorage={props.setTodayStorage} 
-                todayList={props.todayList} setTodayList={props.setTodayList} setTodayIsPressed={props.setTodayIsPressed}/>}
+                todayList={props.todayList} setTodayList={props.setTodayList} setTodayIsPressed={props.setTodayIsPressed}
+                currentInput={currentInput} setCurrentInput={setCurrentInput}/>}
 
                 <SearchForm/>
                 

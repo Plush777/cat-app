@@ -30,11 +30,13 @@ function TodayTooltip(props) {
         props.setTodayIsPressed(false);
         props.setTodayList(false);
         props.setTodayStorage('');
+        props.setCurrentInput('');
     }
 
     const handleEdit = () => {
         props.setTodayIsPressed(false);
         props.setTodayList(false);
+        props.setCurrentInput(JSON.parse(localStorage.getItem('todayList')));
     }
 
     return ( 

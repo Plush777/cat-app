@@ -13,7 +13,7 @@ function TodoAdd(props) {
     }
 
     const enter = e => {
-        if(e.key === 'Enter'){
+        if(e.key === 'Enter' && props.addTodoValue !== ''){
             props.setAddTodoEvent(true);
             props.setAddTodoValue('');
 

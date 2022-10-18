@@ -145,8 +145,8 @@ function TodayActive(props) {
                         <TodayTooltip toolTipClass={toolTipClass} todayIsPressed={props.todayIsPressed} 
                         setTodayIsPressed={props.setTodayIsPressed} isChecked={isChecked} setIsChecked={setIsChecked}
                         todayList={props.todayList} setTodayList={props.setTodayList} txtIsChecked={txtIsChecked} 
-                        setTxtIsChecked={setTxtIsChecked} todayStorage={props.todayStorage} 
-                        setTodayStorage={props.setTodayStorage}/>
+                        setTxtIsChecked={setTxtIsChecked} todayStorage={props.todayStorage} setTodayStorage={props.setTodayStorage} 
+                        currentInput={props.currentInput} setCurrentInput={props.setCurrentInput}/>
                     </Icon>
                 </IconContainer>
             </MyTodayList>  

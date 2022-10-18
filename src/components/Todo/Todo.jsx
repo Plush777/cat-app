@@ -52,7 +52,7 @@ function Todo() {
             <BtnTodoDiv ref={ref}>
                 <BtnTodo onClick={toggleTodo} isOpen={isOpen}>Todo</BtnTodo>
                 {
-                    transitions((style, item) => item && <TodoListBox style={style}/>)
+                    transitions((style, item) => item && <TodoListBox style={style} isOpen={isOpen}/>)
                 }
             </BtnTodoDiv>
         </>

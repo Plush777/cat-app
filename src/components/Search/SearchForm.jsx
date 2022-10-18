@@ -89,7 +89,7 @@ function SearchForm() {
     let [toolTipToggle,setToolTipToggle] = useState(false); //툴팁용 boolean
     let [selectClass,setSelectClass] = useState(''); //툴팁만 active
     let [searchStyle,setSearchStyle] = useState(false); //툴팁 제외한 검색창 boolean
-    let [selected, setSelected] = useLocalStorage('searchSelected', '');
+    let [selected, setSelected] = useLocalStorage('searchSelected', 'faGoogle');
     let [searchValue, setSearchValue] = useState('');
     let [searchUrl, setSearchUrl] = useState(''); //검색 url이 저장되는 공간
 
