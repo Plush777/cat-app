@@ -24,6 +24,8 @@ function TodoAdd(props) {
                     name: props.addTodo
                 }
             ]);
+
+            console.log(props.addTodo);
         }
     }
 
@@ -31,7 +33,7 @@ function TodoAdd(props) {
         <>
             <TodoAddDiv>
                 <input type="text" placeholder="할 일을 적어보세요." className="todo" onChange={inputTodo} 
-                onKeyPress={enter} value={props.addTodoValue}/>
+                onKeyPress={enter} value={props.addTodoValue} spellCheck="false"/>
             </TodoAddDiv>
         </>
      );

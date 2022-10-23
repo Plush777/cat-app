@@ -24,3 +24,18 @@ svg{fill: currentColor;}
     src: url(../../fonts/notoSans/eot/NotoSansKR-Regular-Hestia.eot);
     src: url(../../fonts/notoSans/eot/NotoSansKR-Regular-Hestia.eot?#iefix) format("embedded-opentype"), url(../../fonts/notoSans/woff/NotoSansKR-Regular-Hestia.woff) format("woff");
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-button {
+  display: none;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: #ddd;
+}
+::-webkit-scrollbar-track {
+  display: none;
+}

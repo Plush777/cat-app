@@ -63,9 +63,10 @@ function Main(props) {
                
                 <div className="centerContainer">
                     {
-                        props.yourName && <div className={'timerWrap ' + timerFade}>
-                                            <span className="timer">{time}</span>
-                                        </div>
+                        props.yourName && 
+                        <div className={'timerWrap ' + timerFade}>
+                            <span className="timer">{time}</span>
+                        </div>
                     }
                     <div className={'messageWrap ' + messageFade}>
                         <span className="userName">{props.userName}</span>
