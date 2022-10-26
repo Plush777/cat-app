@@ -58,16 +58,6 @@ function TodoListBox(props) {
     let [todoData,setTodoData] = useLocalStorage('todoData',[]);
 
     useEffect(() => {
-        if(todoData === null){
-            setAddTodoEvent(false);
-            setChangeAdd(false);
-        } else if(!todoData === null) {
-            setAddTodoEvent(true);
-            setChangeAdd(true);
-        }
-    },[todoData,setAddTodoEvent,setChangeAdd]);
-
-    useEffect(() => {
         if(changeAddButton && !props.isOpen){
             setChangeAddButton(false);
         } 
@@ -104,7 +94,8 @@ function TodoListBox(props) {
                 </TodoHeader>
                 {
                     addTodoEvent ? 
-                    <TodoContents todoData={todoData} setTodoData={setTodoData}/> 
+                    <TodoContents todoData={todoData} setTodoData={setTodoData} changeAdd={changeAdd}
+                    setChangeAdd={setChangeAdd} addTodoEvent={addTodoEvent} setAddTodoEvent={setAddTodoEvent}/> 
                         : 
                     <TodoEmpty changeAdd={changeAdd} setChangeAdd={setChangeAdd} changeAddButton={changeAddButton}
                     setChangeAddButton={setChangeAddButton}/>

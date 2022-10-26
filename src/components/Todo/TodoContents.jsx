@@ -1,7 +1,9 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import useLocalStorage from "use-local-storage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencil , faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const TodoContentsDiv = styled.div`
     padding: 7px 16px 0 16px;
@@ -34,6 +36,30 @@ const TodoItemName = styled.label`
     /* checkedArr에 list 값이 존재하면 #777 , 존재하지않으면 #fff를 적용합니다. */
     color: ${props => props.checkedArr.includes(props.index) ? '#777' : '#fff'};
     text-decoration: ${props => props.checkedArr.includes(props.index) ? 'line-through' : 'none'};
+`
+
+const TodoItemButtonContainer = styled.div`
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    column-gap: 16px;
+`
+
+const TodoItemDelete = styled.button.attrs({type: 'button'})`
+    color: #fff;
+    transition: .5s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+
+    ${TodoContentsItem}:hover &{
+        opacity: 1;
+        visibility: visible;
+    }
+`
+
+const TodoItemModify = styled(TodoItemDelete)`
+
 `
 
 function TodoContents(props) {
@@ -74,6 +100,12 @@ function TodoContents(props) {
         }
     },[checkedArr,setCheckedArr])
 
+    const todoItemDelete = () => {
+        let itemArr = [...props.todoData];
+        itemArr.shift();
+        props.setTodoData(itemArr);
+    }
+
     return (  
         <>
             <TodoContentsDiv>
@@ -90,6 +122,14 @@ function TodoContents(props) {
                                         }
                                     }/>
                                     <TodoItemName checkedArr={checkedArr} index={index} htmlFor={item.id}>{item.name}</TodoItemName>
+                                    <TodoItemButtonContainer>
+                                        <TodoItemDelete onClick={todoItemDelete}>
+                                            <FontAwesomeIcon icon={faXmark} />
+                                        </TodoItemDelete>
+                                        <TodoItemModify>
+                                            <FontAwesomeIcon icon={faPencil} />
+                                        </TodoItemModify>
+                                    </TodoItemButtonContainer>
                                 </TodoContentsItem>
                             )
                         })
