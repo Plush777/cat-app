@@ -56,6 +56,7 @@ function TodoListBox(props) {
     let [addTodo,setAddTodo] = useState(''); //사용자가 입력한 할 일 => todoData에 저장됨
     let [addTodoValue,setAddTodoValue] = useState(''); //사용자가 입력한 할 일 => input value에만 저장됨
     let [todoData,setTodoData] = useLocalStorage('todoData',[]);
+    let [checkedArr,setCheckedArr] = useLocalStorage('checkedArr',[]);
 
     useEffect(() => {
         if(changeAddButton && !props.isOpen){
@@ -74,8 +75,10 @@ function TodoListBox(props) {
 
     const allClear = () => {
         setTodoData([]);
+        setCheckedArr([]);
         setAddTodoEvent(false);
         setChangeAdd(false);
+        setChangeAddButton(false);
     }
 
     return ( 
@@ -95,7 +98,8 @@ function TodoListBox(props) {
                 {
                     addTodoEvent ? 
                     <TodoContents todoData={todoData} setTodoData={setTodoData} changeAdd={changeAdd}
-                    setChangeAdd={setChangeAdd} addTodoEvent={addTodoEvent} setAddTodoEvent={setAddTodoEvent}/> 
+                    setChangeAdd={setChangeAdd} addTodoEvent={addTodoEvent} setAddTodoEvent={setAddTodoEvent}
+                    setChangeAddButton={setChangeAddButton} checkedArr={checkedArr} setCheckedArr={setCheckedArr}/> 
                         : 
                     <TodoEmpty changeAdd={changeAdd} setChangeAdd={setChangeAdd} changeAddButton={changeAddButton}
                     setChangeAddButton={setChangeAddButton}/>
