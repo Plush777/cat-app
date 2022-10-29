@@ -20,8 +20,8 @@ function TodoAdd(props) {
             props.setTodoData([
                 ...props.todoData,
                 {
-                    id: props.todoData.length,
-                    name: props.addTodo
+                    name: props.addTodo,
+                    index: props.todoData.length
                 }
             ]);
 

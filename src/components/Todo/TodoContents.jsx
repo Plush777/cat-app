@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -64,6 +64,7 @@ const TodoItemModify = styled(TodoItemDelete)`
 function TodoContents(props) {
 
     let [itemChecked,setItemChecked] = useState(false);
+    let [trigger,setTrigger] = useState(false);
 
     const handleItemCheck = e => {
         /* 체크하면 true , 체크 안하면 false로 되야하는데
@@ -98,10 +99,22 @@ function TodoContents(props) {
         }
     },[props])
 
-    const todoItemDelete = id => {
-        props.setTodoData(props.todoData.filter(el => el.id !== id));
+    // let newTodoData = useMemo(() => {
+    //     return [...props.todoData];
+    // },[props.todoData])
 
-        if(props.todoData.length === 0){
+    const todoItemDelete = el => {
+        props.setTodoData(props.todoData.filter(({index}) => index !== el))
+        // setTrigger(!trigger);
+        // for(let i = 0; i < props.todoData.length; i++){
+        //     newTodoData[i].index = i;
+        // }
+
+        if(props.todoData.index === el){
+            alert('삭제되었습니다.');
+        }
+
+        if(props.todoData.length === 1){
             props.setAddTodoEvent(false);
             props.setChangeAdd(false);
             props.setChangeAddButton(false);
@@ -119,21 +132,21 @@ function TodoContents(props) {
             <TodoContentsDiv>
                 <TodoContentsList>
                     {
-                        props.todoData.map((item,index) => {
+                        props.todoData.map(({name,index}) => {
                             return (
-                                <TodoContentsItem key={item.id}>
+                                <TodoContentsItem key={index}>
                                     <TodoContentsItemCheck checked={props.checkedArr.includes(index) ? true : false} 
-                                    id={item.id} onChange={
+                                    id={index} onChange={
                                         (e) => {
                                             handleItemCheck(e)
                                             checkedItemHandler(e.target.checked, index)
                                         }
                                     }/>
-                                    <TodoItemName checkedArr={props.checkedArr} index={index} htmlFor={item.id}>{item.name}</TodoItemName>
+                                    <TodoItemName checkedArr={props.checkedArr} index={index} htmlFor={index}>{name}</TodoItemName>
                                     <TodoItemButtonContainer>
                                         <TodoItemDelete onClick={
                                             () => {
-                                                todoItemDelete(item.id);
+                                                todoItemDelete(index);
                                                 todoItemCheckedDelete();
                                             }
                                         }>
