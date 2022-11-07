@@ -16,16 +16,7 @@ function TodoAdd(props) {
         if(e.key === 'Enter' && props.addTodoValue !== ''){
             props.setAddTodoEvent(true);
             props.setAddTodoValue('');
-
-            props.setTodoData([
-                ...props.todoData,
-                {
-                    name: props.addTodo,
-                    index: props.todoData.length
-                }
-            ]);
-
-            console.log(props.addTodo);
+            props.setTodoData([...props.todoData,props.addTodo]);
         }
     }
 
@@ -33,7 +24,7 @@ function TodoAdd(props) {
         <>
             <TodoAddDiv>
                 <input type="text" placeholder="할 일을 적어보세요." className="todo" onChange={inputTodo} 
-                onKeyPress={enter} value={props.addTodoValue} spellCheck="false"/>
+                onKeyPress={enter} value={props.addTodoValue} autoFocus={props.changeAdd} spellCheck="false"/>
             </TodoAddDiv>
         </>
      );

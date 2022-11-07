@@ -26,15 +26,15 @@ svg{fill: currentColor;}
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-button {
   display: none;
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 20px;
-  background: #ddd;
+  background: #575757;
 }
 ::-webkit-scrollbar-track {
   display: none;

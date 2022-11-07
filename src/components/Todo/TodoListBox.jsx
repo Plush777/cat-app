@@ -16,6 +16,8 @@ const TodoBox = styled(animated.div)`
     border-radius: 6px;
     background-color: rgba(15,15,15,0.75);
     bottom: 40px;
+    max-height: 430px;
+    overflow-y: auto;
 `
 
 const TodoHeader = styled.div`
@@ -56,7 +58,6 @@ function TodoListBox(props) {
     let [addTodo,setAddTodo] = useState(''); //사용자가 입력한 할 일 => todoData에 저장됨
     let [addTodoValue,setAddTodoValue] = useState(''); //사용자가 입력한 할 일 => input value에만 저장됨
     let [todoData,setTodoData] = useLocalStorage('todoData',[]);
-    let [checkedArr,setCheckedArr] = useLocalStorage('checkedArr',[]);
 
     useEffect(() => {
         if(changeAddButton && !props.isOpen){
@@ -75,7 +76,6 @@ function TodoListBox(props) {
 
     const allClear = () => {
         setTodoData([]);
-        setCheckedArr([]);
         setAddTodoEvent(false);
         setChangeAdd(false);
         setChangeAddButton(false);
@@ -99,7 +99,7 @@ function TodoListBox(props) {
                     addTodoEvent ? 
                     <TodoContents todoData={todoData} setTodoData={setTodoData} changeAdd={changeAdd}
                     setChangeAdd={setChangeAdd} addTodoEvent={addTodoEvent} setAddTodoEvent={setAddTodoEvent}
-                    setChangeAddButton={setChangeAddButton} checkedArr={checkedArr} setCheckedArr={setCheckedArr}/> 
+                    setChangeAddButton={setChangeAddButton}/> 
                         : 
                     <TodoEmpty changeAdd={changeAdd} setChangeAdd={setChangeAdd} changeAddButton={changeAddButton}
                     setChangeAddButton={setChangeAddButton}/>
@@ -108,7 +108,7 @@ function TodoListBox(props) {
                 {
                     changeAdd && <TodoAdd addTodo={addTodo} setAddTodo={setAddTodo} todoData={todoData}
                     setTodoData={setTodoData} addTodoEvent={addTodoEvent} setAddTodoEvent={setAddTodoEvent}
-                    addTodoValue={addTodoValue} setAddTodoValue={setAddTodoValue}/>
+                    addTodoValue={addTodoValue} setAddTodoValue={setAddTodoValue} changeAdd={changeAdd}/>
                 }
             </TodoBox>
         </>
