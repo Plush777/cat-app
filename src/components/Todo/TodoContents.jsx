@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil , faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -28,6 +28,11 @@ const TodoItemName = styled.p`
     white-space: nowrap;
     font-size: 16px;
     color: #fff;
+
+    &[contenteditable="true"]{
+        user-select: ${({modifyTodo}) => modifyTodo ? 'text' : 'none'};
+        outline: ${({modifyTodo}) => modifyTodo && 'none'};
+    }
 `
 
 const TodoItemButtonContainer = styled.div`
@@ -56,6 +61,14 @@ const TodoItemModify = styled(TodoItemDelete)`
 
 function TodoContents(props) {
 
+    let [modifyTodo,setModifyTodo] = useState([]);
+
+    const contentEditRef = useRef(null);
+
+    useEffect(() => {
+        contentEditRef.current.focus();
+    },[contentEditRef])
+
     const todoItemDelete = el => {
         props.setTodoData(props.todoData.filter(item => item !== el));
 
@@ -72,14 +85,24 @@ function TodoContents(props) {
                 <TodoContentsList>
                     {
                         props.todoData.map((item,i) => {
+
+                            const todoItemModify = () => {
+                                let modifyTodoCopy = [...modifyTodo];
+                                modifyTodoCopy[i] = true;
+                                setModifyTodo(modifyTodoCopy);
+                            }
+
+                            console.log(modifyTodo);
+
                             return (
                                 <TodoContentsItem key={i}>
-                                    <TodoItemName>{item}</TodoItemName>
+                                    <TodoItemName contentEditable={modifyTodo[i]} 
+                                    suppressContentEditableWarning={modifyTodo[i]} ref={contentEditRef} modifyTodo={modifyTodo}>{item}</TodoItemName>
                                     <TodoItemButtonContainer>
                                         <TodoItemDelete onClick={() => todoItemDelete(item)}>
                                             <FontAwesomeIcon icon={faXmark} />
                                         </TodoItemDelete>
-                                        <TodoItemModify>
+                                        <TodoItemModify onClick={() => todoItemModify()}>
                                             <FontAwesomeIcon icon={faPencil} />
                                         </TodoItemModify>
                                     </TodoItemButtonContainer>
