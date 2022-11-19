@@ -16,6 +16,10 @@ const ListItem = styled.li`
     &:hover{
         background-color: rgba(255,255,255,0.1);
     }
+
+    @media screen and (max-width: 550px){
+        height: 24px;
+    }
 `
 
 const ListTxt = styled.span`
@@ -23,6 +27,10 @@ const ListTxt = styled.span`
     color: #fff;
     cursor: pointer;
     text-indent: 7px;
+
+    @media screen and (max-width: 550px){
+        font-size: 12px;
+    }
 `
 
 function SearchTooltip(props) {

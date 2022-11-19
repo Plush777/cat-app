@@ -14,6 +14,10 @@ const BtnTodo = styled.button.attrs({'type': 'button'})`
     color: ${({ isOpen }) => isOpen ? '#fff' : 'rgba(255,255,255,0.5);'};
     transition: .5s ease-in-out;
     &:hover{color: #fff;}
+
+    @media screen and (max-width: 768px){
+        font-size: 16px;
+    }
 `
 
 function Todo() {

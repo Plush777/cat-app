@@ -16,6 +16,11 @@ const SearchConetainer = styled.div`
     display: flex;
     align-items: center;
     cursor: pointer;
+
+    @media screen and (max-width: 550px){
+        top: 0;
+        left: 10px;
+    }
 `
 
 const SearchInner = styled.div`
@@ -31,6 +36,13 @@ const ViewIcon = styled.i`
 
     ${SearchInner}:focus-within &{
         color: #fff;
+    }
+
+    @media screen and (max-width: 550px){
+        >svg{
+            width: 14px; 
+            height: 14px;
+        }
     }
 `
 
@@ -63,6 +75,10 @@ const SearchLine = styled.div`
     ${SearchInner}:hover & {
         opacity: 1;
         visibility: visible;
+    }
+
+    @media screen and (max-width: 550px){
+        bottom: 3px;
     }
 `
 
@@ -163,13 +179,13 @@ function SearchForm() {
                     }} ref={ref}>
                         <SearchTooltip setSearchStyle={setSearchStyle} setToolTipToggle={setToolTipToggle} selectClass={selectClass} selected={selected} setSelected={setSelected}/>
                         {
-                            selected === 'faGoogle' && <FontAwesomeIcon className="ico" icon={faGoogle} />
+                            selected === 'faGoogle' && <FontAwesomeIcon className="ico bws" icon={faGoogle} />
                         }
                         {
-                            selected === 'faEdge' && <FontAwesomeIcon className="ico" icon={faEdge} />
+                            selected === 'faEdge' && <FontAwesomeIcon className="ico bws" icon={faEdge} />
                         }
                         {
-                            selected === 'faN' && <FontAwesomeIcon className="ico" icon={faN} />
+                            selected === 'faN' && <FontAwesomeIcon className="ico bws" icon={faN} />
                         }      
                         <FontAwesomeIcon className="ico angle" icon={faAngleDown}/>
                     </SearchSelect>

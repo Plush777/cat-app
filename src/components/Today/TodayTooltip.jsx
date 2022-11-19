@@ -1,10 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil , faXmark } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const MenuList = styled.ul`
     flex: 1;
     padding: 5px 0;
+
+    @media screen and (max-width: 550px){
+        padding: 10px 0;
+    }
 `
 
 const MenuItem = styled.li`
@@ -13,8 +19,15 @@ const MenuItem = styled.li`
     column-gap: 5px;
     height: 28px;
     cursor: pointer;
-    &:hover{
-        background-color: rgba(255,255,255,0.1);
+
+    @media screen and (max-width: 550px){
+        &:nth-of-type(2){margin-bottom: 10px;}
+    }
+    
+    @media (hover: hover) {
+        &:hover{
+            background-color: rgba(255,255,255,0.1);
+        }
     }
 `
 
@@ -24,7 +37,32 @@ const MenuTxt = styled.span`
     cursor: pointer;
 `
 
+const MobileToolTipCloseButton = styled.div.attrs({role: 'button', tabIndex: '0'})`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 25px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin: 0 15px;
+    color: #fff;
+    background-color: rgba(43,43,43,0.8);
+
+    &:before{
+        content: '';
+        position: absolute;
+        bottom: 114px;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: -1;
+    }
+`
+
 function TodayTooltip(props) {
+
+    let [m550, setM550] = useState(false);
 
     const handleClear = () => {
         props.setTodayIsPressed(false);
@@ -39,6 +77,18 @@ function TodayTooltip(props) {
         props.setCurrentInput(JSON.parse(localStorage.getItem('todayList')));
     }
 
+    const handleTooltipClose = () => {
+        props.setToolTipClass('');
+    }
+
+    useEffect(() => {
+        if (window.matchMedia("(max-width: 550px)").matches) {
+            setM550(true);
+        } else {
+            setM550(false);
+        }
+    },[m550]);
+
     return ( 
         <>
             <div className={`toolTip today arrowUp ${props.toolTipClass}`}>
@@ -51,6 +101,13 @@ function TodayTooltip(props) {
                         <FontAwesomeIcon className="ico xMark" icon={faXmark} />
                         <MenuTxt>clear</MenuTxt>
                     </MenuItem>
+                    {
+                        m550 &&
+
+                        <MenuItem onClick={handleTooltipClose}>
+                            <MobileToolTipCloseButton>Close</MobileToolTipCloseButton>
+                        </MenuItem>
+                    }
                 </MenuList>
             </div>
         </>

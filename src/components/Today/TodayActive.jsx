@@ -22,6 +22,14 @@ const TodayValue = styled.span`
     margin: 0 12px;
     color: #fff;
     font-size: 36px;
+    
+    @media screen and (max-width: 768px){
+        font-size: 30px;
+    }
+
+    @media screen and (max-width: 550px){
+        font-size: 26px;
+    }
 `
 
 const Icon = styled.button.attrs({type: 'button'})`
@@ -43,6 +51,14 @@ const IconDefault = styled(Icon)`
 const TodayTxt = styled.h3`
     font-size: 21px;
     color: #fff;
+
+    @media screen and (max-width: 768px){
+        font-size: 18px;
+    }
+
+    @media screen and (max-width: 550px){
+        font-size: 16px;
+    }
 `
 
 const IconContainer = styled.div`
@@ -60,6 +76,11 @@ const IconContainer = styled.div`
     &.checked{
         .todayValue{text-decoration: line-through; color: #ddd;}
         .activeCheckBox{visibility: visible;}
+    }
+
+    @media screen and (max-width: 550px){
+        position: static;
+        .ico.hv,.unCheckBox{visibility: visible;}
     }
 `
 
@@ -146,7 +167,7 @@ function TodayActive(props) {
                         setTodayIsPressed={props.setTodayIsPressed} isChecked={isChecked} setIsChecked={setIsChecked}
                         todayList={props.todayList} setTodayList={props.setTodayList} txtIsChecked={txtIsChecked} 
                         setTxtIsChecked={setTxtIsChecked} todayStorage={props.todayStorage} setTodayStorage={props.setTodayStorage} 
-                        currentInput={props.currentInput} setCurrentInput={props.setCurrentInput}/>
+                        currentInput={props.currentInput} setCurrentInput={props.setCurrentInput} setToolTipClass={setToolTipClass}/>
                     </Icon>
                 </IconContainer>
             </MyTodayList>  

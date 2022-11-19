@@ -1,0 +1,72 @@
+@media screen and (max-width: 768px) {
+    .timerWrap{
+        .timer{font-size: 140px;}
+    }
+
+    .messageWrap{font-size: 44px;}
+
+    .weatherWrap{
+        .weatherContainer{
+            .weatherImg img{height: 26px;}
+        }
+        .location{top: 22px;
+            .locationName{font-size: 13px;}
+        }
+        .weatherDesc{
+            .temp{font-size: 18px;}
+        }
+    }
+
+    .quotesArea{margin: 0 20px;
+        .author{font-size: 14px;}
+        .quote{margin-bottom: 2px; font-size: 16px;}
+    }
+
+    input[type="text"]{
+        &.searchForm{width: 140px; font-size: 14px;}
+    }
+}
+
+@media screen and (max-width: 550px){
+    .timerWrap{line-height: 130px;
+        .timer{font-size: 120px;}
+    }
+
+    .messageWrap{font-size: 30px;}
+
+    .quotesArea{
+        .author,.quote{font-size: 14px;}
+    }
+
+    .weatherWrap{top: 10px;
+        .weatherContainer{position: relative;
+            .weatherImg{position: absolute; top: -11px; right: 45px;
+                img{height: 40px; object-fit: contain;}
+            }
+        }
+        .location{top: 16px;
+            .locationName{font-size: 12px;}
+        }
+        .weatherDesc{
+            .temp{font-size: 16px;}
+        }
+    }
+
+    input[type="text"]{
+        &.searchForm{width: 100px; font-size: 12px;}
+    }
+
+    .ico{
+        &.bws,&.angle{width: 12px;}
+    }
+
+    .toolTip{
+        &.searchWith{width: 90px; right: -52px !important; top: 48px !important;}
+        &.today{width: 100%; top: initial; right: 0; bottom: 0; border-radius: 0; bottom: -114px; 
+            &.active{bottom: 0;}
+            &.arrowUp:before{display: none;}
+        }
+    }
+
+    *{-webkit-tap-highlight-color: transparent;}
+}

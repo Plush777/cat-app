@@ -1,5 +1,6 @@
 import './scss/App.scss';
-import './scss/reset.scss'
+import './scss/reset.scss';
+import './scss/mobile.scss';
 import axios from 'axios';
 import { useEffect} from 'react';
 import { useState } from 'react';
