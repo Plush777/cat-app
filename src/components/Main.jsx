@@ -12,7 +12,8 @@ function Main(props) {
     const [timerFade,setTimerFade] = useState('');
     const [messageFade ,setMessageFade] = useState('');
     let [currentInput,setCurrentInput] = useState('');
-    
+    let [isInputClicked,setIsInputClicked] = useState(''); //모바일 TodayList input focus 시 mobileTransition 클래스 추가
+    let [isNone,setIsNone] = useState(''); //모바일 TodayList input focus 시 centerContainer에 none 클래스 추가
 
     const getTime = () => {
         const date = new Date();
@@ -57,11 +58,19 @@ function Main(props) {
     console.log(props.todayList);
     console.log(props.todayIsPressed);
 
+    useEffect(() => {
+        if(isInputClicked){
+            setIsNone('none');
+        } else {
+            setIsNone('');
+        }
+    },[isInputClicked]);
+
     return ( 
         <>
             <div className="center">
                
-                <div className="centerContainer">
+                <div className={`centerContainer ${isNone}`}>
                     {
                         props.yourName && 
                         <div className={'timerWrap ' + timerFade}>
@@ -78,11 +87,13 @@ function Main(props) {
 
                 {props.todayList && <TodayActive todayStorage={props.todayStorage} setTodayStorage={props.setTodayStorage} 
                 todayIsPressed={props.todayIsPressed}setTodayIsPressed={props.setTodayIsPressed} 
-                todayList={props.todayList} setTodayList={props.setTodayList} currentInput={currentInput} setCurrentInput={setCurrentInput}/>}
+                todayList={props.todayList} setTodayList={props.setTodayList} currentInput={currentInput} 
+                setCurrentInput={setCurrentInput} m550={props.m550} setM550={props.setM550}/>}
 
                 {!props.todayList && <TodayList todayStorage={props.todayStorage} setTodayStorage={props.setTodayStorage} 
                 todayList={props.todayList} setTodayList={props.setTodayList} setTodayIsPressed={props.setTodayIsPressed}
-                currentInput={currentInput} setCurrentInput={setCurrentInput}/>}
+                currentInput={currentInput} setCurrentInput={setCurrentInput} isInputClicked={isInputClicked}
+                setIsInputClicked={setIsInputClicked} setIsNone={setIsNone} m550={props.m550} setM550={props.setM550}/>}
 
                 <SearchForm/>
                 

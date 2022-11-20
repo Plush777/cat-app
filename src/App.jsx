@@ -21,6 +21,7 @@ function App() {
     let [todayList,setTodayList] = useState(false); //todayList 컴포넌트 렌더링 여부
     let [todayStorage,setTodayStorage] = useLocalStorage('todayList',''); //todayList 컴포넌트에서 인풋값 저장
     let [todayIsPressed,setTodayIsPressed] = useLocalStorage('todayIsPressed',false); //todayList 컴포넌트에서 인풋값 저장
+    let [m550, setM550] = useState(false); //모바일 550
 
     useEffect(() => {
         axios.get('https://api.thecatapi.com/v1/images/search').then((res) => {
@@ -51,24 +52,32 @@ function App() {
     console.log(yourName);
     console.log(`isPressed: ${isPressed}`);
 
-  return (
-    <div className="App">
-        <div id='bg'>
-            {background && <img src={background.url} alt='background'/>}
+    useEffect(() => {
+        if (window.matchMedia("(max-width: 550px)").matches) {
+            setM550(true);
+        } else {
+            setM550(false);
+        }
+    },[setM550]);
 
-            {loading && <Loading/>}
+    return (
+        <div className="App">
+            <div id='bg'>
+                {background && <img src={background.url} alt='background'/>}
 
-            {error && <BgError/>}
+                {loading && <Loading/>}
 
-            {!yourName && <WhatsYourName setYourName={setYourName} yourName={yourName} 
-            userName={userName} setUserName={setUserName} isPressed={isPressed} setIsPressed={setIsPressed}/>}
+                {error && <BgError/>}
 
-            {yourName && <Main yourName={yourName} userName={userName} todayStorage={todayStorage} 
-            setTodayStorage={setTodayStorage} todayList={todayList} setTodayList={setTodayList} todayIsPressed={todayIsPressed}
-            setTodayIsPressed={setTodayIsPressed}/>}
+                {!yourName && <WhatsYourName setYourName={setYourName} yourName={yourName} 
+                userName={userName} setUserName={setUserName} isPressed={isPressed} setIsPressed={setIsPressed}/>}
+
+                {yourName && <Main yourName={yourName} userName={userName} todayStorage={todayStorage} 
+                setTodayStorage={setTodayStorage} todayList={todayList} setTodayList={setTodayList} todayIsPressed={todayIsPressed}
+                setTodayIsPressed={setTodayIsPressed} m550={m550} setM550={setM550}/>}
+            </div>
         </div>
-    </div>
-  );
+    );
 }
 
 export default App;

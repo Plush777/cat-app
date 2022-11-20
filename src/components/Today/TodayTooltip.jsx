@@ -1,8 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil , faXmark } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
-import { useState } from "react";
-import { useEffect } from "react";
 
 const MenuList = styled.ul`
     flex: 1;
@@ -62,8 +60,6 @@ const MobileToolTipCloseButton = styled.div.attrs({role: 'button', tabIndex: '0'
 
 function TodayTooltip(props) {
 
-    let [m550, setM550] = useState(false);
-
     const handleClear = () => {
         props.setTodayIsPressed(false);
         props.setTodayList(false);
@@ -81,14 +77,6 @@ function TodayTooltip(props) {
         props.setToolTipClass('');
     }
 
-    useEffect(() => {
-        if (window.matchMedia("(max-width: 550px)").matches) {
-            setM550(true);
-        } else {
-            setM550(false);
-        }
-    },[m550]);
-
     return ( 
         <>
             <div className={`toolTip today arrowUp ${props.toolTipClass}`}>
@@ -102,7 +90,7 @@ function TodayTooltip(props) {
                         <MenuTxt>clear</MenuTxt>
                     </MenuItem>
                     {
-                        m550 &&
+                        props.m550 &&
 
                         <MenuItem onClick={handleTooltipClose}>
                             <MobileToolTipCloseButton>Close</MobileToolTipCloseButton>

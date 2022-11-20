@@ -1,9 +1,17 @@
 @media screen and (max-width: 768px) {
-    .timerWrap{
-        .timer{font-size: 140px;}
+
+    *{-webkit-tap-highlight-color: transparent;}
+
+    .todayWrap{font-size: 30px;
+        input[type="text"]{font-size: 20px;}
+        .txt{margin-bottom: 5px;}
     }
 
-    .messageWrap{font-size: 44px;}
+    .timerWrap{
+        .timer{font-size: 130px;}
+    }
+
+    .messageWrap{font-size: 39px;}
 
     .weatherWrap{
         .weatherContainer{
@@ -25,14 +33,34 @@
     input[type="text"]{
         &.searchForm{width: 140px; font-size: 14px;}
     }
+
+    .question{font-size: 44px;}
+
+    .username{
+        input{font-size: 44px; padding-bottom: 5px;}
+    }
 }
 
 @media screen and (max-width: 550px){
-    .timerWrap{line-height: 130px;
-        .timer{font-size: 120px;}
+
+    .centerContainer{transition: .3s ease-in-out;}
+
+    .none{opacity: 0;}
+
+    .todayWrap{flex: 0.6; font-size: 22px; transition: .3s ease-in-out;
+        input[type="text"]{height: 35px; font-size: 18px;}
+        .txt{margin-bottom: 0;}
+
+        &.mobileTransition{position: absolute; top: 50%; transform: translateY(-50%);
+
+        }
     }
 
-    .messageWrap{font-size: 30px;}
+    .timerWrap{line-height: 130px; transition: .3s ease-in-out;
+        .timer{font-size: 110px;}
+    }
+
+    .messageWrap{font-size: 25px;}
 
     .quotesArea{
         .author,.quote{font-size: 14px;}
@@ -40,7 +68,7 @@
 
     .weatherWrap{top: 10px;
         .weatherContainer{position: relative;
-            .weatherImg{position: absolute; top: -11px; right: 45px;
+            .weatherImg{position: absolute; top: -12px; right: 40px;
                 img{height: 40px; object-fit: contain;}
             }
         }
@@ -68,5 +96,9 @@
         }
     }
 
-    *{-webkit-tap-highlight-color: transparent;}
+    .question{font-size: 30px;}
+
+    .username{
+        input{height: 35px; font-size: 30px; padding-bottom: 10px;}
+    }
 }
